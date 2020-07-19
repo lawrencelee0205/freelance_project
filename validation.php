@@ -50,58 +50,60 @@ if(!empty($_POST)){
 </script>
 </head>
 <body>
-<img width="150" height="100" style="margin-left:90px;" src="https://cdn.vox-cdn.com/thumbor/8tLchaDMIEDNzUD3mYQ7v1ZQL84=/0x0:2012x1341/920x613/filters:focal(0x0:2012x1341):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg" >
-<div class="container">
-<form class="form-horizontal" action="validation.php" method="post">
+<div class="container text-center">
+<img width="150" height="100"  src="https://cdn.vox-cdn.com/thumbor/8tLchaDMIEDNzUD3mYQ7v1ZQL84=/0x0:2012x1341/920x613/filters:focal(0x0:2012x1341):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg" >
+
 <div class="form-group">
 <h2>Create an Account</h2>
 <p>If you already have a Google Account, you can <a href="https://www.google.com/">sign in here</a></p>
 <h2>Required information for Google account</h2>
 </div>
 
+<form class="form-horizontal" action="validation.php" method="post">
+
 <div class="form-group">
-<label class="col-sm-3">
+<label class="col-sm-6 text-right">
 Your current email addres: 
 </label>
-<div class="col-sm-3">
-<input required type="email" name="current_email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"><br><small>e.g: myname@example.com. This wil be used to sign-in to your account.</small><br>
-</div>
+<input class="col-sm-2" required type="email" name="current_email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+<small class="col-sm-3 text-left">e.g: myname@example.com.<br> This wil be used to sign-in to your account.</small>
 </div>
 
+
 <div class="form-group">
-<label class="col-sm-3">
+<label class="col-sm-6 text-right">
 Choose a password: 
 </label>
-<div class="col-sm-3">
-<input id="current_pword" required type="password" name="current_pword" minlength="8" onkeyup="check();"><br><small>Minimum of 8 characters in length.</small><br>
-</div>
+<input class="col-sm-2" id="current_pword" required type="password" name="current_pword" minlength="8" onkeyup="check();">
+<small class="col-sm-2 text-left">Minimum of 8 characters in length.</small>
 </div>
 
 <div class="form-group">
-<label class=" col-sm-3">
+<label class="col-sm-6 text-right">
 Re-enter password: 
 </label>
-<div class="col-sm-3">
-<input id="reenter_pword" required type="password" name="reenter_pword" minlength="8" onkeyup="check();">
+<input class="col-sm-2" id="reenter_pword" required type="password" name="reenter_pword" minlength="8" onkeyup="check();">
 <span id='message'></span>
 </div>
+
+<div class="form-group">
+<label class="col-sm-6"></label>
+<div class="col-sm-2 text-left">
+<input type="checkbox" value="Stayed_signed_in">&nbsp;Stayed signed in
+</div>
+
+<br>
+<div class="col-sm-6"></div>
+<div class="col-sm-4 text-left">
+<input type="checkbox" value="Enable_web_history">&nbsp;Enable Web History <a href="https://support.google.com/websearch/answer/54068?co=GENIE.Platform%3DAndroid&hl=en">Learn More</a><br>
+</div>
 </div>
 
 <div class="form-group">
-<label class=" col-sm-3">
-</label>
-<div class="col-sm-3">
-<input type="checkbox" value="Stayed_signed_in">Stayed signed in<br>
-<input type="checkbox" value="Enable_web_history">Enable Web History <a href="https://support.google.com/websearch/answer/54068?co=GENIE.Platform%3DAndroid&hl=en">Learn More</a><br>
-</div>
-</div>
-
-<div class="form-group">
-<label class=" col-sm-3">
+<label class="col-sm-6 text-right">
 Location:
 </label>
-<div class="col-sm-3">
-<select name="location">
+<select class="col-sm-2" name="location">
    <option disabled selected>Select a country</option>
    <option value="Afganistan">Afghanistan</option>
    <option value="Albania">Albania</option>
@@ -350,18 +352,21 @@ Location:
    <option value="Zambia">Zambia</option>
    <option value="Zimbabwe">Zimbabwe</option>
 </select>
-</select><br>
-</div>
 </div>
 
 <div class="form-group">
-<label class=" col-sm-3">
+<label class="col-sm-6 text-right">
 Word Verification: 
 </label>
-<div class="col-sm-3">
-Type the characters you see in the picture below.<br>
-<p><img src="./captcha.php" width="120" height="30" alt="CAPTCHA"></p>
-<p><input type="text" size="6" maxlength="5" name="word_verification"><br>
+<div class="col-sm-6 text-left">Type the characters you see in the picture below.</div>
+
+<div class="col-sm-6"></div>
+<div class="col-sm-6 text-left">
+<img src="./captcha.php" width="120" height="30" alt="CAPTCHA">
+</div>
+<p>&nbsp;</p>
+<div class="col-sm-6"></div>
+<input class="col-sm-2" type="text" size="6" maxlength="5" name="word_verification"><br>
 <?php 
 
 if(!empty($_POST)){
@@ -375,15 +380,13 @@ if(!empty($_POST)){
 
 ?>
 </div>
-</div>
 
 <div class="form-group">
-<div class="col-sm-3">
-<input type="submit" value="Submit">
-</div>
+<div class="col-sm-6"></div>
+<input class="col-sm-1" type="submit" value="Submit">
 </div>
 </form>
-
 </div>
+
 </body>
 </html>
