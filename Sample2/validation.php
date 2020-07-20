@@ -7,8 +7,11 @@ if(!empty($_POST)){
     $reenter_pword = $_POST["reenter_pword"];
     $location = $_POST["location"];
     $word_verification = $_POST["word_verification"];
+    $code = $_SESSION['digit'];
 
-    if($current_pword!=$reenter_pword || $location==null){
+
+
+    if($current_pword!=$reenter_pword || $location==null || $word_verification!=$code){
       echo '<script language="javascript">';
       echo 'alert("wrong information entered")';
       echo '</script>';
@@ -83,7 +86,7 @@ Choose a password:
 Re-enter password: 
 </label>
 <input class="col-sm-2" id="reenter_pword" required type="password" name="reenter_pword" minlength="8" onkeyup="check();">
-<span id='message'></span>
+<span class="col-sm-3 text-left" id='message'></span>
 </div>
 
 <div class="form-group">
@@ -366,7 +369,7 @@ Word Verification:
 </div>
 <p>&nbsp;</p>
 <div class="col-sm-6"></div>
-<input class="col-sm-2" type="text" size="6" maxlength="5" name="word_verification"><br>
+<input class="col-sm-2" type="text" size="6" maxlength="5" name="word_verification">
 <?php 
 
 if(!empty($_POST)){
@@ -374,7 +377,7 @@ if(!empty($_POST)){
   $word_verification = $_POST["word_verification"];
 
   if($word_verification != $_SESSION['digit']) {
-    echo "<span style='color:red;'>Verification code incorrect</span>";
+    echo "<span class='col-sm-3 text-left' style='color:red;'>Verification code incorrect</span>";
   }
 }
 

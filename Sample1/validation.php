@@ -1,14 +1,36 @@
 <?php
 session_start();
+echo 
+"
+<script>
+
+var check = function() {
+  if (document.getElementById('current_pword').value == document.getElementById('reenter_pword').value) 
+    {
+      document.getElementById('message').style.color = 'green';
+      document.getElementById('message').innerHTML = 'Matched';
+    } 
+  else 
+    {
+      document.getElementById('message').style.color = 'red';
+      document.getElementById('message').innerHTML = 'Not matched';
+    }
+}
+
+</script>
+";
+
 error_reporting(0);
+
 if(!empty($_POST)){
     $current_email = $_POST["current_email"];
     $current_pword = $_POST["current_pword"];
     $reenter_pword = $_POST["reenter_pword"];
     $location = $_POST["location"];
     $word_verification = $_POST["word_verification"];
+    $code = $_SESSION['digit'];
 
-    if($current_pword!=$reenter_pword || $location==null){
+    if($current_pword!=$reenter_pword || $location==null || $word_verification!=$code){
       echo '<script language="javascript">';
       echo 'alert("wrong information entered")';
       echo '</script>';
@@ -19,7 +41,7 @@ if(!empty($_POST)){
       echo 'alert("message successfully sent")';
       echo '</script>';
       session_destroy();
-    }    
+    }  
 /*
     foreach($_POST as $item)
     {
@@ -36,18 +58,6 @@ if(!empty($_POST)){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script>
-
-  var check = function() {
-  if (document.getElementById('current_pword').value == document.getElementById('reenter_pword').value) {
-    document.getElementById('message').style.color = 'green';
-    document.getElementById('message').innerHTML = 'matching';
-  } else {
-    document.getElementById('message').style.color = 'red';
-    document.getElementById('message').innerHTML = 'not matching';
-  }
-}
-</script>
 </head>
 <body>
 <div class="container text-center">
@@ -83,7 +93,7 @@ Choose a password:
 Re-enter password: 
 </label>
 <input class="col-sm-2" id="reenter_pword" required type="password" name="reenter_pword" minlength="8" onkeyup="check();">
-<span id='message'></span>
+<span class="col-sm-3 text-left" id='message'></span>
 </div>
 
 <div class="form-group">
@@ -366,7 +376,7 @@ Word Verification:
 </div>
 <p>&nbsp;</p>
 <div class="col-sm-6"></div>
-<input class="col-sm-2" type="text" size="6" maxlength="5" name="word_verification"><br>
+<input class="col-sm-2" id="code" type="text" size="6" maxlength="5" name="word_verification">
 <?php 
 
 if(!empty($_POST)){
@@ -374,7 +384,7 @@ if(!empty($_POST)){
   $word_verification = $_POST["word_verification"];
 
   if($word_verification != $_SESSION['digit']) {
-    echo "<span style='color:red;'>Verification code incorrect</span>";
+    echo "<span class='col-sm-3 text-left' style='color:red;'>Verification code incorrect</span>";
   }
 }
 

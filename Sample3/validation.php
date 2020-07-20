@@ -1,34 +1,36 @@
 <?php
+
 session_start();
 
 error_reporting(0);
 
 
 if(!empty($_POST)){
-    $CurrentEmail = $_POST["current_email"];
-    $CurrentPword = $_POST["current_pword"];
-    $ReenterPword = $_POST["reenter_pword"];
+
     $Location = $_POST["location"];
+    $CurrentEmail = $_POST["current_email"];
+
+    $ReenterPword = $_POST["reenter_pword"];
+    $CurrentPword = $_POST["current_pword"];
     $WordVerification = $_POST["word_verification"];
 
-    if($CurrentPword!=$ReenterPword || $Location==null){
-      echo '<script language="javascript">';
-      echo 'alert("Wrong information entered")';
-      echo '</script>';
+    $code = $_SESSION['digit'];
+    if($CurrentPword!=$ReenterPword || $Location==null || $WordVerification!=$code){
+      echo '<script language="javascript">
+      alert("Wrong information entered")
+      </script>';
+
+      unset($_POST);
+
       session_destroy();
     }
     else{
-      echo '<script language="javascript">';
-      echo 'alert("Message successfully sent")';
-      echo '</script>';
+      echo '<script language="javascript">
+      alert("Message successfully sent")
+      </script>';
+
       session_destroy();
     }    
-/*
-    foreach($_POST as $item)
-    {
-      echo "$item";
-    }
-    */
 }
 ?>
 
@@ -39,22 +41,7 @@ if(!empty($_POST)){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script>
 
-  var check = function() {
-    var current_pword = document.getElementById('current_pword');
-    var reenter_pword = document.getElementById('reenter_pword')
-    var message = document.getElementById('message');
-
-  if (current_pword.value == reenter_pword.value) {
-    message.style.color = 'green';
-    message.innerHTML = 'matching';
-  } else {
-    message.style.color = 'red';
-    message.innerHTML = 'not matching';
-  }
-}
-</script>
 </head>
 <body>
 <div class="container text-center">
@@ -373,7 +360,7 @@ Word Verification:
 </div>
 <p>&nbsp;</p>
 <div class="col-sm-6"></div>
-<input class="col-sm-2" type="text" size="6" maxlength="5" name="word_verification"><br>
+<input class="col-sm-2" type="text" size="6" maxlength="5" name="word_verification">
 <?php 
 
 if(!empty($_POST)){
@@ -381,7 +368,7 @@ if(!empty($_POST)){
   $word_verification = $_POST["word_verification"];
 
   if($word_verification != $_SESSION['digit']) {
-    echo "<span style='color:red;'>Verification code incorrect</span>";
+    echo "<span class='col-sm-3 text-left' style='color:red;'>Verification code incorrect</span>";
   }
 }
 
@@ -394,6 +381,22 @@ if(!empty($_POST)){
 </div>
 </form>
 </div>
+<script>
 
+var check = function() {
+
+  var current_pword = document.getElementById('current_pword');
+  var reenter_pword = document.getElementById('reenter_pword')
+  var message = document.getElementById('message');
+
+if (current_pword.value == reenter_pword.value) {
+  message.style.color = 'green';
+  message.innerHTML = 'Matched';
+} else {
+  message.style.color = 'red';
+  message.innerHTML = 'Not matching';
+}
+}
+</script>
 </body>
 </html>
